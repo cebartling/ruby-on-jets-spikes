@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  postgres-db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./postgres/init.sh:/docker-entrypoint-initdb.d/0001-initialization.sh
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: helloworld
+      POSTGRES_PASSWORD: helloworld
+      ANON: web_anon
+      AUTHENTICATOR: authenticator
+
+volumes:
+  db-data:
+    driver: local
+    
